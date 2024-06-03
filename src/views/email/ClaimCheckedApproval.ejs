@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Claim Ckecked Notification</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        color: #4a4a4a;
+        background-color: #f0f4f9;
+        padding: 20px;
+        margin: 0;
+      }
+      .email-container {
+        max-width: 600px;
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        border-top: 4px solid #4caf50;
+      }
+      a,
+      a:visited {
+        color: #4caf50;
+        text-decoration: none;
+      }
+      a:hover,
+      a:active {
+        text-decoration: underline;
+      }
+      .header {
+        color: #fff;
+        background-color: #4caf50;
+        padding: 10px;
+        border-radius: 4px 4px 0 0;
+        font-size: 24px;
+        line-height: 28px;
+        text-align: center;
+      }
+      .button {
+        background-color: #4caf50; /* Green */
+        border: none;
+        color: white !important;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 20px 0;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      .footer {
+        font-size: 12px;
+        color: #909090;
+        margin-top: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body style="background-color: #f0f4f9">
+    <br><br>
+    <div class="email-container">
+      <div class="header">Claim Checked Confirmation</div>
+      <h4>Congratulations <%= firstname %> <%= lastname %>,</h4>
+      <p>
+        Your claim request has been checked now go to system and download your claim file after You will appload signed file by RIB. Below are the details:
+      </p>
+      <table style="margin: auto; width: 90%; text-align: left">
+        <tr>
+          <td><strong>claim title</strong></td>
+          <td><%= title %></td>
+        </tr>
+        <tr>
+          <td  colspan="2" style="text-align: center;"><strong>description:</strong></td>
+       
+        </tr>
+        <tr>
+          <td  colspan="2"><strong><%= description %></strong></td>
+       
+        </tr>
+        <!-- description -->
+       
+        <tr>
+          <td><strong>Date</strong></td>
+          <td><%= date %></td>
+        </tr>
+        <tr>
+          <td><strong>Time</strong></td>
+          <td><%= time %></td>
+        </tr>
+      </table>
+      <p>
+        Please ensure that you came to our head quarter for more details about your claim
+      </p>
+      <p>
+        If you have any questions or need further assistance, please don't
+        hesitate to reply to this email or contact us at
+        <a href="mailto:email@example.com">email@example.com</a>.
+      </p>
+     
+    </div>
+  </body>
+</html>
