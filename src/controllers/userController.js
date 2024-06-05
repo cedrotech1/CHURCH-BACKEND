@@ -149,19 +149,6 @@ export const getOneUser = async (req, res) => {
 
   try {
 
-    //  let users;
-
-    // if (req.user.role === "restaurentadmin") {
-    //   users = await getUsers(req.user.restaurents, req.user.id);
-    // } else if (req.user.role === "superadmin" || req.user.role === "employee") {
-    //   users = await getallUsers();
-
-    //   // If the logged-in user is an employee, filter users with role "customer"
-    //   if (req.user.role === "employee") {
-    //     users = users.filter(user => user.role === "customer");
-    //   }
-    // }
-    
     const user = await getUser(req.params.id);
     if (!user) {
       return res.status(404).json({

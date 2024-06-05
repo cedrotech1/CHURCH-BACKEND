@@ -10,6 +10,11 @@ import {
   updateOnePosts,
   ckeckPosts,
   unckeckPosts,
+  createImagePosts,
+  getevents,
+  getblogs,
+  getpics
+  
   
 } from "../services/PostsService";
 import {getUserEmployees} from "../services/userService";
@@ -72,14 +77,6 @@ export const uploadPdf = async (req, res) => {
 
 export const addPostsController = async (req, res) => {
   try {
-    // if (req.user.role !== "customer") {
-    //   return res.status(401).json({
-    //     success: false,
-    //     message: "Not authorized, you are not  customer",
-    //   });
-    // }
-
-    // let approval = await getUserEmployees();
 
     req.body.userid = req.user.id
     const currentDate = new Date();
@@ -98,10 +95,10 @@ export const addPostsController = async (req, res) => {
     req.body.date = date;
     req.body.time = time;
 
-    if (req.body.type!=='blog' &&  req.body.type!=='event') {
+    if (req.body.type!=='blog' &&  req.body.type!=='event'  &&  req.body.type!=='pic') {
       return res.status(400).json({
         success: false,
-        message: "post must be event or blog",
+        message: "post must be event or blog or pic",
       });
     }
 
@@ -118,17 +115,29 @@ export const addPostsController = async (req, res) => {
     }
       req.body.file = image.url;
 
-    if (!req.body.title ||  !req.body.description) {
-      return res.status(400).json({
-        success: false,
-        message: "all field is required",
-      });
-    }
+      if(req.body.type==='event' || req.body.type==='blog'){
+        if (!req.body.title ||  !req.body.description) {
+          return res.status(400).json({
+            success: false,
+            message: "all field is required",
+          });
+        }
+
+      }
+
+   
    
 
    
     req.body.status = "active";
-    const newPosts = await createPosts(req.body);
+    let newPosts;
+
+    if(req.body.type=='pic'){
+
+       newPosts = await createImagePosts(req.body);
+
+    }
+       newPosts = await createPosts(req.body);
   
     // const email = new Email(req.user, newPosts);
     // await email.sendPostsConfirmation();
@@ -431,6 +440,112 @@ export const deleteOnePostsController = async (req, res) => {
     });
   }
 };
+
+// getevents
+
+export const Events = async (req, res) => {
+  try {
+
+
+    let data = await getevents();
+    // data = allPosts;
+    // let data;
+
+    // if (req.user.role == "employee" || req.user.role == "superadmin") {
+
+    //   data = allPosts;
+    // }
+    // if (req.user.role === "customer") {
+
+    //   data = allPosts.filter(Posts => Posts.userid === req.user.id);
+    // }
+
+
+
+
+    return res.status(200).json({
+      success: true,
+      message: "Posts retrieved successfully",
+      data,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Something went wrong",
+      error,
+    });
+  }
+};
+
+export const Blogs = async (req, res) => {
+  try {
+
+
+    let data = await getblogs();
+    // data = allPosts;
+    // let data;
+
+    // if (req.user.role == "employee" || req.user.role == "superadmin") {
+
+    //   data = allPosts;
+    // }
+    // if (req.user.role === "customer") {
+
+    //   data = allPosts.filter(Posts => Posts.userid === req.user.id);
+    // }
+
+
+
+
+    return res.status(200).json({
+      success: true,
+      message: "Posts retrieved successfully",
+      data,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Something went wrong",
+      error,
+    });
+  }
+};
+
+export const Pics = async (req, res) => {
+  try {
+
+
+    let data = await getpics();
+    // data = allPosts;
+    // let data;
+
+    // if (req.user.role == "employee" || req.user.role == "superadmin") {
+
+    //   data = allPosts;
+    // }
+    // if (req.user.role === "customer") {
+
+    //   data = allPosts.filter(Posts => Posts.userid === req.user.id);
+    // }
+
+
+
+
+    return res.status(200).json({
+      success: true,
+      message: "Posts retrieved successfully",
+      data,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Something went wrong",
+      error,
+    });
+  }
+};
+
+
 export const Posts = async (req, res) => {
   try {
 

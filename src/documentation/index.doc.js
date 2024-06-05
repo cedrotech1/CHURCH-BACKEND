@@ -494,53 +494,53 @@ const options = {
 
 
 
-    "/api/v1/Posts/update/{id}": {
-      put: {
-        tags: ["Posts"],
-        summary: "update a Posts",
-        description: "Update a Posts",
-        operationId: "updatePosts",
-        parameters: [
-          {
-            name: "id",
-            in: "path",
-            description: "Posts's id",
-            required: true,
-            schema: {
-              type: "string",
-            },
-          },
-        ],
-        requestBody: {
-          content: {
-            "application/json": {
+    // "/api/v1/Posts/update/{id}": {
+    //   put: {
+    //     tags: ["Posts"],
+    //     summary: "update a Posts",
+    //     description: "Update a Posts",
+    //     operationId: "updatePosts",
+    //     parameters: [
+    //       {
+    //         name: "id",
+    //         in: "path",
+    //         description: "Posts's id",
+    //         required: true,
+    //         schema: {
+    //           type: "string",
+    //         },
+    //       },
+    //     ],
+    //     requestBody: {
+    //       content: {
+    //         "application/json": {
           
-              example: {
-                title: "my pin disoster",
-                description: "after...big bb",
-              },
-            },
-            required: true,
-          },
-        },
+    //           example: {
+    //             title: "my pin disoster",
+    //             description: "after...big bb",
+    //           },
+    //         },
+    //         required: true,
+    //       },
+    //     },
      
       
-        responses: {
-          201: {
-            description: "Posts created successfully",
-          },
-          400: {
-            description: "Bad request",
-          },
-          401: {
-            description: "Unauthorized",
-          },
-          500: {
-            description: "Something went wrong",
-          },
-        },
-      },
-    },
+    //     responses: {
+    //       201: {
+    //         description: "Posts created successfully",
+    //       },
+    //       400: {
+    //         description: "Bad request",
+    //       },
+    //       401: {
+    //         description: "Unauthorized",
+    //       },
+    //       500: {
+    //         description: "Something went wrong",
+    //       },
+    //     },
+    //   },
+    // },
     // "/api/v1/Posts/add": {
     //   post: {
     //     tags: ["Posts"],
@@ -699,6 +699,93 @@ const options = {
       },
     },
 
+    "/api/v1/Posts/events": {
+      get: {
+        tags: ["Posts"],
+        summary: "all  a events Posts",
+        description: "Posts",
+        operationId: "events",
+      
+      
+        responses: {
+          201: {
+            description: "Posts retrieved successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Something went wrong",
+          },
+        },
+      },
+    },
+
+
+
+
+    "/api/v1/Posts/pics": {
+      get: {
+        tags: ["Posts"],
+        summary: "all  a pics Posts",
+        description: "pics",
+        operationId: "pics",
+      
+      
+        responses: {
+          201: {
+            description: "pics Posts retrieved successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Something went wrong",
+          },
+        },
+      },
+    },
+
+
+
+
+
+
+
+
+    "/api/v1/Posts/blogs": {
+      get: {
+        tags: ["Posts"],
+        summary: "all  a blogs Posts",
+        description: "Posts blogs",
+        operationId: "blogs",
+      
+      
+        responses: {
+          201: {
+            description: "blogs Posts retrieved successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Something went wrong",
+          },
+        },
+      },
+    },
+
+
+
     "/api/v1/Posts/add": {
       "post": {
         "tags": ["Posts"],
@@ -726,7 +813,7 @@ const options = {
                   "file": {
                     "type": "string",
                     "format": "binary",
-                    "description": "PDF file to upload"
+                    "description": "image file to upload"
                   },
                   "title": {
                     "type": "string",
@@ -736,12 +823,12 @@ const options = {
                   "description": {
                     "type": "string",
                     // "format": "binary",
-                    "description": "PDF file to upload"
+                    "description": "description of post "
                   },
                   "type": {
                     "type": "string",
                     // "format": "binary",
-                    "description": "type of post"
+                    "description": "type of post, you must specify event/blog/pic"
                   }
                 },
                 "required": ["file"]
@@ -803,234 +890,234 @@ const options = {
         }
       }
     },
-    "/api/v1/Posts/pending": {
-      get: {
-        tags: ["Posts"],
-        summary: "all  a pending Posts",
-        description: "pending Posts",
-        operationId: "all pending Posts",
+    // "/api/v1/Posts/pending": {
+    //   get: {
+    //     tags: ["Posts"],
+    //     summary: "all  a pending Posts",
+    //     description: "pending Posts",
+    //     operationId: "all pending Posts",
       
       
-        responses: {
-          201: {
-            description: "Pending Posts retrieved successfully",
-          },
-          400: {
-            description: "Bad request",
-          },
-          401: {
-            description: "Unauthorized",
-          },
-          500: {
-            description: "Something went wrong",
-          },
-        },
-      },
-    },
-    "/api/v1/Posts/one/{id}": {
-      get: {
-        tags: ["Posts"],
-        summary: "get one  a Posts",
-        description: "customer/admin get one Posts",
-        operationId: "getPosts",
-        parameters: [
-          {
-            name: "id",
-            in: "path",
-            description: "Posts's id",
-            required: true,
-            schema: {
-              type: "string",
-            },
-          },
-        ],
+    //     responses: {
+    //       201: {
+    //         description: "Pending Posts retrieved successfully",
+    //       },
+    //       400: {
+    //         description: "Bad request",
+    //       },
+    //       401: {
+    //         description: "Unauthorized",
+    //       },
+    //       500: {
+    //         description: "Something went wrong",
+    //       },
+    //     },
+    //   },
+    // },
+    // "/api/v1/Posts/one/{id}": {
+    //   get: {
+    //     tags: ["Posts"],
+    //     summary: "get one  a Posts",
+    //     description: "customer/admin get one Posts",
+    //     operationId: "getPosts",
+    //     parameters: [
+    //       {
+    //         name: "id",
+    //         in: "path",
+    //         description: "Posts's id",
+    //         required: true,
+    //         schema: {
+    //           type: "string",
+    //         },
+    //       },
+    //     ],
       
-        responses: {
-          201: {
-            description: "Posts retrieved successfully",
-          },
-          400: {
-            description: "Bad request",
-          },
-          401: {
-            description: "Unauthorized",
-          },
-          500: {
-            description: "Something went wrong",
-          },
-        },
-      },
-    },
-    "/api/v1/Posts/delete/{id}": {
-      delete: {
-        tags: ["Posts"],
-        summary: "delete a Posts",
-        description: "delete Posts",
-        operationId: "deletePosts",
-        parameters: [
-          {
-            name: "id",
-            in: "path",
-            description: "Posts's id",
-            required: true,
-            schema: {
-              type: "string",
-            },
-          },
-        ],
+    //     responses: {
+    //       201: {
+    //         description: "Posts retrieved successfully",
+    //       },
+    //       400: {
+    //         description: "Bad request",
+    //       },
+    //       401: {
+    //         description: "Unauthorized",
+    //       },
+    //       500: {
+    //         description: "Something went wrong",
+    //       },
+    //     },
+    //   },
+    // },
+    // "/api/v1/Posts/delete/{id}": {
+    //   delete: {
+    //     tags: ["Posts"],
+    //     summary: "delete a Posts",
+    //     description: "delete Posts",
+    //     operationId: "deletePosts",
+    //     parameters: [
+    //       {
+    //         name: "id",
+    //         in: "path",
+    //         description: "Posts's id",
+    //         required: true,
+    //         schema: {
+    //           type: "string",
+    //         },
+    //       },
+    //     ],
       
-        responses: {
-          201: {
-            description: "Posts rejected successfully",
-          },
-          400: {
-            description: "Bad request",
-          },
-          401: {
-            description: "Unauthorized",
-          },
-          500: {
-            description: "Something went wrong",
-          },
-        },
-      },
-    },
-    "/api/v1/Posts/approve/{id}": {
-      put: {
-        tags: ["Posts"],
-        summary: "Add a approve",
-        description: "approve Posts",
-        operationId: "approvePosts",
-        parameters: [
-          {
-            name: "id",
-            in: "path",
-            description: "Posts's id",
-            required: true,
-            schema: {
-              type: "string",
-            },
-          },
-        ],
+    //     responses: {
+    //       201: {
+    //         description: "Posts rejected successfully",
+    //       },
+    //       400: {
+    //         description: "Bad request",
+    //       },
+    //       401: {
+    //         description: "Unauthorized",
+    //       },
+    //       500: {
+    //         description: "Something went wrong",
+    //       },
+    //     },
+    //   },
+    // },
+    // "/api/v1/Posts/approve/{id}": {
+    //   put: {
+    //     tags: ["Posts"],
+    //     summary: "Add a approve",
+    //     description: "approve Posts",
+    //     operationId: "approvePosts",
+    //     parameters: [
+    //       {
+    //         name: "id",
+    //         in: "path",
+    //         description: "Posts's id",
+    //         required: true,
+    //         schema: {
+    //           type: "string",
+    //         },
+    //       },
+    //     ],
       
-        responses: {
-          201: {
-            description: "Posts approved successfully",
-          },
-          400: {
-            description: "Bad request",
-          },
-          401: {
-            description: "Unauthorized",
-          },
-          500: {
-            description: "Something went wrong",
-          },
-        },
-      },
-    },
-    "/api/v1/Posts/reject/{id}": {
-      put: {
-        tags: ["Posts"],
-        summary: "reject a Posts",
-        description: "rejecting Posts",
-        operationId: "rejectPosts",
-        parameters: [
-          {
-            name: "id",
-            in: "path",
-            description: "Posts's id",
-            required: true,
-            schema: {
-              type: "string",
-            },
-          },
-        ],
+    //     responses: {
+    //       201: {
+    //         description: "Posts approved successfully",
+    //       },
+    //       400: {
+    //         description: "Bad request",
+    //       },
+    //       401: {
+    //         description: "Unauthorized",
+    //       },
+    //       500: {
+    //         description: "Something went wrong",
+    //       },
+    //     },
+    //   },
+    // },
+    // "/api/v1/Posts/reject/{id}": {
+    //   put: {
+    //     tags: ["Posts"],
+    //     summary: "reject a Posts",
+    //     description: "rejecting Posts",
+    //     operationId: "rejectPosts",
+    //     parameters: [
+    //       {
+    //         name: "id",
+    //         in: "path",
+    //         description: "Posts's id",
+    //         required: true,
+    //         schema: {
+    //           type: "string",
+    //         },
+    //       },
+    //     ],
       
-        responses: {
-          201: {
-            description: "Posts rejected successfully",
-          },
-          400: {
-            description: "Bad request",
-          },
-          401: {
-            description: "Unauthorized",
-          },
-          500: {
-            description: "Something went wrong",
-          },
-        },
-      },
-    },
-    "/api/v1/Posts/check/{id}": {
-      put: {
-        tags: ["Posts"],
-        summary: "Add a check",
-        description: "check Posts",
-        operationId: "checkPosts",
-        parameters: [
-          {
-            name: "id",
-            in: "path",
-            description: "Posts's id",
-            required: true,
-            schema: {
-              type: "string",
-            },
-          },
-        ],
+    //     responses: {
+    //       201: {
+    //         description: "Posts rejected successfully",
+    //       },
+    //       400: {
+    //         description: "Bad request",
+    //       },
+    //       401: {
+    //         description: "Unauthorized",
+    //       },
+    //       500: {
+    //         description: "Something went wrong",
+    //       },
+    //     },
+    //   },
+    // },
+    // "/api/v1/Posts/check/{id}": {
+    //   put: {
+    //     tags: ["Posts"],
+    //     summary: "Add a check",
+    //     description: "check Posts",
+    //     operationId: "checkPosts",
+    //     parameters: [
+    //       {
+    //         name: "id",
+    //         in: "path",
+    //         description: "Posts's id",
+    //         required: true,
+    //         schema: {
+    //           type: "string",
+    //         },
+    //       },
+    //     ],
       
-        responses: {
-          201: {
-            description: "Posts checked successfully",
-          },
-          400: {
-            description: "Bad request",
-          },
-          401: {
-            description: "Unauthorized",
-          },
-          500: {
-            description: "Something went wrong",
-          },
-        },
-      },
-    },
-    "/api/v1/Posts/uncheck/{id}": {
-      put: {
-        tags: ["Posts"],
-        summary: "uncheck",
-        description: "uncheck Posts",
-        operationId: "uncheckPosts",
-        parameters: [
-          {
-            name: "id",
-            in: "path",
-            description: "Posts's id",
-            required: true,
-            schema: {
-              type: "string",
-            },
-          },
-        ],
+    //     responses: {
+    //       201: {
+    //         description: "Posts checked successfully",
+    //       },
+    //       400: {
+    //         description: "Bad request",
+    //       },
+    //       401: {
+    //         description: "Unauthorized",
+    //       },
+    //       500: {
+    //         description: "Something went wrong",
+    //       },
+    //     },
+    //   },
+    // },
+    // "/api/v1/Posts/uncheck/{id}": {
+    //   put: {
+    //     tags: ["Posts"],
+    //     summary: "uncheck",
+    //     description: "uncheck Posts",
+    //     operationId: "uncheckPosts",
+    //     parameters: [
+    //       {
+    //         name: "id",
+    //         in: "path",
+    //         description: "Posts's id",
+    //         required: true,
+    //         schema: {
+    //           type: "string",
+    //         },
+    //       },
+    //     ],
       
-        responses: {
-          201: {
-            description: "Posts checked successfully",
-          },
-          400: {
-            description: "Bad request",
-          },
-          401: {
-            description: "Unauthorized",
-          },
-          500: {
-            description: "Something went wrong",
-          },
-        },
-      },
-    },
+    //     responses: {
+    //       201: {
+    //         description: "Posts checked successfully",
+    //       },
+    //       400: {
+    //         description: "Bad request",
+    //       },
+    //       401: {
+    //         description: "Unauthorized",
+    //       },
+    //       500: {
+    //         description: "Something went wrong",
+    //       },
+    //     },
+    //   },
+    // },
 
 
   },

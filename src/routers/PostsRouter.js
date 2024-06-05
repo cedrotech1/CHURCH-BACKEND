@@ -10,13 +10,22 @@ import {
   updatePostsController,
   ckeckPostsController,
   unckeckPostsController,
-  uploadPdf
+  uploadPdf,
+  Events,
+  Blogs,
+  Pics
+
 } from "../controllers/PostsController";
 import { protect } from "../middlewares/protect";
 const router = express.Router();
 router.delete("/delete/:id", protect, deleteOnePostsController);   
 router.post("/add", protect, addPostsController);
 router.get("/", protect, Posts);
+
+router.get("/events", protect, Events);
+router.get("/blogs", protect, Blogs);
+router.get("/pics", protect, Pics);
+
 // router.get("/pending", protect, pendingController);
 router.get("/one/:id", protect, getOnePostsController);
 router.put("/approve/:id", protect, approvePostsController);
