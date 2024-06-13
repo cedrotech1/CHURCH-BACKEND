@@ -5,6 +5,7 @@ module.exports = (sequelize) => {
   class Posts extends Model {
     static associate(models) {
       Posts.belongsTo(models.User, { foreignKey: "userid", as: "PostsUser" });
+      Posts.belongsTo(models.Koraris, { foreignKey: "korariId", as: "KorariPosts" }); // Add this line
     }
   }
 
@@ -13,6 +14,10 @@ module.exports = (sequelize) => {
       userid: {
         type: DataTypes.INTEGER,
         allowNull: false,
+      },
+      korariId: { // Add this field
+        type: DataTypes.INTEGER,
+        allowNull: true,
       },
       title: {
         type: DataTypes.STRING,

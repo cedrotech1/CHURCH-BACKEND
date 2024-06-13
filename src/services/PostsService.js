@@ -7,13 +7,7 @@ const Posts = db["Posts"];
 
 // createImagePosts
 
-export const createImagePosts = async (PostsData) => {
-  try {
-    return await Posts.create(PostsData);
-  } catch (error) {
-    throw new Error(`Error creating Posts: ${error.message}`);
-  }
-};
+
 
 export const createPosts = async (PostsData) => {
   try {
@@ -48,6 +42,7 @@ export const getevents = async () => {
     const events = await Posts.findAll({
       where: {
         type: "event",
+        korariId:null
       },
    
       include: [
@@ -79,6 +74,7 @@ export const getblogs = async () => {
     const blogs = await Posts.findAll({
       where: {
         type: "blog",
+        korariId:null
       },
    
       include: [
@@ -110,6 +106,7 @@ export const getpics = async () => {
     const pics = await Posts.findAll({
       where: {
         type: "pic",
+        korariId:null
       },
    
       include: [
@@ -243,22 +240,31 @@ export const pending = async (id) => {
 
 export const getone = async (id) => {
   try {
-    const Posts = await Posts.findByPk(id,
-      {
-        include: [
-
-          {
-            model: users,
-            as: "PostsUser",
+    const events = await Posts.findAll({
+      where: {
+        id: id,
+      },
+   
+      include: [
+        {
+          model: users,
+          as: "PostsUser",
+          attributes: {
+            exclude: ["password"],
           },
+        },
+      ],
+    });
 
-        ],
+    if (!events || events.length === 0) {
+      return null;
+    }
 
-      });
 
-    return Posts;
+
+    return events;
   } catch (error) {
-    console.error("Error fetching all Posts with users:", error);
+    console.error("Error fetching events:", error);
     throw error;
   }
 };

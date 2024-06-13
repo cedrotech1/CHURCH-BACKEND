@@ -2,38 +2,25 @@ import express from "express";
 import {
   addPostsController,
   Posts,
-  approvePostsController,
-  rejectPostsController,
   deleteOnePostsController,
   getOnePostsController,
-  pendingController,
   updatePostsController,
-  ckeckPostsController,
-  unckeckPostsController,
-  uploadPdf,
   Events,
   Blogs,
   Pics
 
 } from "../controllers/PostsController";
 import { protect } from "../middlewares/protect";
+import { optionalProtect } from "../middlewares/optionalprotect";
 const router = express.Router();
 router.delete("/delete/:id", protect, deleteOnePostsController);   
 router.post("/add", protect, addPostsController);
-router.get("/", protect, Posts);
+router.get("/", optionalProtect, Posts);
+router.get("/events", optionalProtect, Events);
+router.get("/blogs", optionalProtect, Blogs);
+router.get("/pics", optionalProtect, Pics);
 
-router.get("/events", protect, Events);
-router.get("/blogs", protect, Blogs);
-router.get("/pics", protect, Pics);
-
-// router.get("/pending", protect, pendingController);
-router.get("/one/:id", protect, getOnePostsController);
-router.put("/approve/:id", protect, approvePostsController);
-router.put("/check/:id", protect, ckeckPostsController);
-router.put("/uncheck/:id", protect, unckeckPostsController);
-router.put("/reject/:id", protect, rejectPostsController);
+router.get("/one/:id", optionalProtect, getOnePostsController);
 router.put("/update/:id", protect, updatePostsController);
-// Add the upload route
-router.post('/upload/:id',protect, uploadPdf);
 
 export default router;

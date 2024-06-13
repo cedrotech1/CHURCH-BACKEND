@@ -32,6 +32,9 @@ module.exports = {
       resetkey:{
         type: Sequelize.STRING,
       },
+      notify:{
+        type: Sequelize.STRING,
+      },
 
 
       createdAt: {

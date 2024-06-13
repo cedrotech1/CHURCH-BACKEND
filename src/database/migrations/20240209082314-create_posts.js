@@ -13,6 +13,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      korariId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
       title: {
         type: Sequelize.STRING,
         allowNull: false,

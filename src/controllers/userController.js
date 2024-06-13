@@ -12,19 +12,17 @@ import {
   updateUserCode
 } from "../services/userService";
 import Email from "../utils/mailer";
-
 import bcrypt from "bcrypt";
 
 export const addCustomer = async (req, res) => {
   try {
-    if (!req.body.nid || !req.body.firstname || !req.body.phone || req.body.lastname === "" || req.body.tinnumber === "" ||  !req.body.email || req.body.email === "" || !req.body.password || req.body.password === ""
+    if ( !req.body.firstname || !req.body.phone || req.body.lastname === "" ||  !req.body.password || req.body.password === ""
   ) {
       return res.status(400).json({
         success: false,
         message: "Please provide all information",
       });
     }
-
 
     const userExist = await getUserByEmail(req.body.email);
     if (userExist) {
@@ -59,6 +57,7 @@ export const addCustomer = async (req, res) => {
         phone: newUser.phone,  
         email: newUser.email,
         role: newUser.role,
+        notify: newUser.notify,
       },
     });
   } catch (error) {

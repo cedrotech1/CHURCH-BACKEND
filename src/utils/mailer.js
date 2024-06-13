@@ -66,7 +66,7 @@ class Email {
   }
 
   async sendAccountAdded() {
-    await this.send("accountAdded", "Your Account on RRA-Claims is Ready");
+    await this.send("accountAdded", "Your Account on millacle web is Ready");
   }
 
   async sendClaimConfirmation() {

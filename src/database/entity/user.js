@@ -17,6 +17,7 @@ module.exports = (sequelize) => {
       role: DataTypes.STRING,
       password: DataTypes.STRING,
       resetkey: DataTypes.STRING,
+      notify: DataTypes.STRING,
      
     },
     {

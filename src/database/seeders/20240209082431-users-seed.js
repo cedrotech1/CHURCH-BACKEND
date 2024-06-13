@@ -15,6 +15,15 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        firstname: 'cedro',
+        lastname: 'hakuzimana',
+        email: 'cedrickhakuzimana@gmail.com',
+        role: 'user',
+        password: hashedPassword,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     
    
    

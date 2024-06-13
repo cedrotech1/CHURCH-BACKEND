@@ -21,6 +21,7 @@ const options = {
     { name: "Authontication", description: "" },
     { name: "Users", description: "Users" },
     { name: "Posts", description: "Posts" },
+    { name: "Korari", description: "Korari" },
 
 
   ],
@@ -67,9 +68,9 @@ const options = {
     "/api/v1/users/signup": {
       post: {
         tags: ["Users"],
-        summary: "Add a customer",
-        description: "Add a user",
-        operationId: "addcustomerorrestadmin",
+        summary: "signup as christian",
+        description: "signup as christian",
+        operationId: "addchristian",
         requestBody: {
           content: {
             "application/json": {
@@ -80,13 +81,10 @@ const options = {
                 firstname: "John",
                 lastname: "cedrick",
                 phone: "078654325",
-                tinnumber: "29383834",
-                nid: "23838",
                 email: "cedrickhakuzimana@gmail.com",
+                notify: "yes/no",
                 password: "1234",
                 comfirmpassword: "1234",
-              
-             
               },
             },
             required: true,
@@ -122,12 +120,10 @@ const options = {
                 $ref: "#/components/schemas/User",
               },
               example: {
-                firstname: "John",
+                firstname: "cedro",
                 lastname: "cedrick",
                 phone: "078654325",
-                tinnumber: "29383834",
-                email: "test@example.com",
-                password: "1234",
+                email: "cedrickhakuzimana@gmail.com"
                         
               },
             },
@@ -452,8 +448,6 @@ const options = {
       },
     },
 
-
-
     "/api/v1/users/delete/{id}": {
       delete: {
         tags: ["Users"],
@@ -490,190 +484,6 @@ const options = {
         },
       },
     },
-
-
-
-
-    // "/api/v1/Posts/update/{id}": {
-    //   put: {
-    //     tags: ["Posts"],
-    //     summary: "update a Posts",
-    //     description: "Update a Posts",
-    //     operationId: "updatePosts",
-    //     parameters: [
-    //       {
-    //         name: "id",
-    //         in: "path",
-    //         description: "Posts's id",
-    //         required: true,
-    //         schema: {
-    //           type: "string",
-    //         },
-    //       },
-    //     ],
-    //     requestBody: {
-    //       content: {
-    //         "application/json": {
-          
-    //           example: {
-    //             title: "my pin disoster",
-    //             description: "after...big bb",
-    //           },
-    //         },
-    //         required: true,
-    //       },
-    //     },
-     
-      
-    //     responses: {
-    //       201: {
-    //         description: "Posts created successfully",
-    //       },
-    //       400: {
-    //         description: "Bad request",
-    //       },
-    //       401: {
-    //         description: "Unauthorized",
-    //       },
-    //       500: {
-    //         description: "Something went wrong",
-    //       },
-    //     },
-    //   },
-    // },
-    // "/api/v1/Posts/add": {
-    //   post: {
-    //     tags: ["Posts"],
-    //     summary: "Add a Posts",
-    //     description: "Add a Posts",
-    //     operationId: "addPosts",
-    //     requestBody: {
-    //       content: {
-    //         "application/json": {
-          
-    //           example: {
-    //             title: "my pin disoster",
-    //             description: "after...big bb",
-    //           },
-    //         },
-    //         required: true,
-    //       },
-    //     },
-     
-      
-    //     responses: {
-    //       201: {
-    //         description: "Posts created successfully",
-    //       },
-    //       400: {
-    //         description: "Bad request",
-    //       },
-    //       401: {
-    //         description: "Unauthorized",
-    //       },
-    //       500: {
-    //         description: "Something went wrong",
-    //       },
-    //     },
-    //   },
-    // },
-
-
-    // "/api/v1/Posts/add": {
-    //   "post": {
-    //     "tags": ["Posts"],
-    //     "summary": "Upload a PDF for a Posts",
-    //     "description": "Upload a PDF for a Posts",
-    //     "operationId": "addPostsUpload",
-    //     parameters: [
-    //       {
-    //         name: "id",
-    //         in: "path",
-    //         description: "Posts's id",
-    //         required: true,
-    //         schema: {
-    //           type: "string",
-    //         },
-    //       },
-    //     ],
-    //     "requestBody": {
-    //       "required": true,
-    //       "content": {
-    //         "multipart/form-data": {
-    //           "schema": {
-    //             "type": "object",
-    //             "properties": {
-    //               "file": {
-    //                 "type": "string",
-    //                 "format": "binary",
-    //                 "description": "PDF file to upload"
-    //               },
-    //               "title": "string",
-    //               "description": "string",
-    //               "type":"string"
-                  
-    //             },
-    //             "required": ["file"]
-    //           }
-    //         }
-    //       }
-    //     },
-    //     "responses": {
-    //       "201": {
-    //         "description": "File uploaded successfully",
-    //         "content": {
-    //           "application/json": {
-    //             "schema": {
-    //               "type": "object",
-    //               "properties": {
-    //                 "message": {
-    //                   "type": "string"
-    //                 },
-    //                 "fileUrl": {
-    //                   "type": "string"
-    //                 },
-    //                 "public_id": {
-    //                   "type": "string"
-    //                 }
-    //               },
-    //               "example": {
-    //                 "message": "File uploaded successfully",
-    //                 "fileUrl": "http://res.cloudinary.com/dzl8xve8s/pdf_uploads/sample.pdf",
-    //                 "public_id": "sample"
-    //               }
-    //             }
-    //           }
-    //         }
-    //       },
-    //       "400": {
-    //         "description": "Bad request",
-    //         "content": {
-    //           "application/json": {
-    //             "schema": {
-    //               "type": "object",
-    //               "properties": {
-    //                 "error": {
-    //                   "type": "string"
-    //                 }
-    //               },
-    //               "example": {
-    //                 "error": "No file uploaded"
-    //               }
-    //             }
-    //           }
-    //         }
-    //       },
-    //       "401": {
-    //         "description": "Unauthorized"
-    //       },
-    //       "500": {
-    //         "description": "Something went wrong"
-    //       }
-    //     }
-    //   }
-    // },
-
-
     "/api/v1/Posts/": {
       get: {
         tags: ["Posts"],
@@ -723,10 +533,6 @@ const options = {
         },
       },
     },
-
-
-
-
     "/api/v1/Posts/pics": {
       get: {
         tags: ["Posts"],
@@ -890,234 +696,479 @@ const options = {
         }
       }
     },
-    // "/api/v1/Posts/pending": {
-    //   get: {
-    //     tags: ["Posts"],
-    //     summary: "all  a pending Posts",
-    //     description: "pending Posts",
-    //     operationId: "all pending Posts",
+    "/api/v1/Posts/update/{id}": {
+      "put": {
+        "tags": ["Posts"],
+        "summary": "update post either blog or event",
+        "description": "update post either blog or event",
+        "operationId": "updatePostsUpload",
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            description: "Posts's id",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "image file to upload"
+                  },
+                  "title": {
+                    "type": "string",
+                    // "format": "binary",
+                    "description": "Post title"
+                  },
+                  "description": {
+                    "type": "string",
+                    // "format": "binary",
+                    "description": "description of post "
+                  },
+                  "type": {
+                    "type": "string",
+                    // "format": "binary",
+                    "description": "type of post, you must specify event/blog/pic"
+                  }
+                },
+                "required": ["file"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "File uploaded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "fileUrl": {
+                      "type": "string"
+                    },
+                    "public_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "File uploaded successfully",
+                    "fileUrl": "http://res.cloudinary.com/dzl8xve8s/pdf_uploads/sample.pdf",
+                    "public_id": "sample"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "No file uploaded"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Something went wrong"
+          }
+        }
+      }
+    },
+  
+   
+    "/api/v1/Posts/one/{id}": {
+      get: {
+        tags: ["Posts"],
+        summary: "get one  a Posts",
+        description: "customer/admin get one Posts",
+        operationId: "getPosts",
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            description: "Posts's id",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+      
+        responses: {
+          201: {
+            description: "Posts retrieved successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Something went wrong",
+          },
+        },
+      },
+    },
+    "/api/v1/Posts/delete/{id}": {
+      delete: {
+        tags: ["Posts"],
+        summary: "delete a Posts",
+        description: "delete Posts",
+        operationId: "deletePosts",
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            description: "Posts's id",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+      
+        responses: {
+          201: {
+            description: "Posts rejected successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Something went wrong",
+          },
+        },
+      },
+    },
+
+
+
+
+    "/api/v1/Korari/": {
+      get: {
+        tags: ["Korari"],
+        summary: "all  a Korari",
+        description: "Korari",
+        operationId: "all Korari",
       
       
-    //     responses: {
-    //       201: {
-    //         description: "Pending Posts retrieved successfully",
-    //       },
-    //       400: {
-    //         description: "Bad request",
-    //       },
-    //       401: {
-    //         description: "Unauthorized",
-    //       },
-    //       500: {
-    //         description: "Something went wrong",
-    //       },
-    //     },
-    //   },
-    // },
-    // "/api/v1/Posts/one/{id}": {
-    //   get: {
-    //     tags: ["Posts"],
-    //     summary: "get one  a Posts",
-    //     description: "customer/admin get one Posts",
-    //     operationId: "getPosts",
-    //     parameters: [
-    //       {
-    //         name: "id",
-    //         in: "path",
-    //         description: "Posts's id",
-    //         required: true,
-    //         schema: {
-    //           type: "string",
-    //         },
-    //       },
-    //     ],
+        responses: {
+          201: {
+            description: "Korari retrieved successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Something went wrong",
+          },
+        },
+      },
+    },
+    "/api/v1/Korari/one/{id}": {
+      get: {
+        tags: ["Korari"],
+        summary: "one  a Korari",
+        description: "Korari",
+        operationId: "one Korari",
+             parameters: [
+          {
+            name: "id",
+            in: "path",
+            description: "korari's id",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
       
-    //     responses: {
-    //       201: {
-    //         description: "Posts retrieved successfully",
-    //       },
-    //       400: {
-    //         description: "Bad request",
-    //       },
-    //       401: {
-    //         description: "Unauthorized",
-    //       },
-    //       500: {
-    //         description: "Something went wrong",
-    //       },
-    //     },
-    //   },
-    // },
-    // "/api/v1/Posts/delete/{id}": {
-    //   delete: {
-    //     tags: ["Posts"],
-    //     summary: "delete a Posts",
-    //     description: "delete Posts",
-    //     operationId: "deletePosts",
-    //     parameters: [
-    //       {
-    //         name: "id",
-    //         in: "path",
-    //         description: "Posts's id",
-    //         required: true,
-    //         schema: {
-    //           type: "string",
-    //         },
-    //       },
-    //     ],
       
-    //     responses: {
-    //       201: {
-    //         description: "Posts rejected successfully",
-    //       },
-    //       400: {
-    //         description: "Bad request",
-    //       },
-    //       401: {
-    //         description: "Unauthorized",
-    //       },
-    //       500: {
-    //         description: "Something went wrong",
-    //       },
-    //     },
-    //   },
-    // },
-    // "/api/v1/Posts/approve/{id}": {
-    //   put: {
-    //     tags: ["Posts"],
-    //     summary: "Add a approve",
-    //     description: "approve Posts",
-    //     operationId: "approvePosts",
-    //     parameters: [
-    //       {
-    //         name: "id",
-    //         in: "path",
-    //         description: "Posts's id",
-    //         required: true,
-    //         schema: {
-    //           type: "string",
-    //         },
-    //       },
-    //     ],
+        responses: {
+          201: {
+            description: "Korari retrieved successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Something went wrong",
+          },
+        },
+      },
+    },
+
+    "/api/v1/Korari/delete/{id}": {
+      delete: {
+        tags: ["Korari"],
+        summary: "delete a Korari",
+        description: "delete Korari",
+        operationId: "deleteKorari",
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            description: "Posts's id",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
       
-    //     responses: {
-    //       201: {
-    //         description: "Posts approved successfully",
-    //       },
-    //       400: {
-    //         description: "Bad request",
-    //       },
-    //       401: {
-    //         description: "Unauthorized",
-    //       },
-    //       500: {
-    //         description: "Something went wrong",
-    //       },
-    //     },
-    //   },
-    // },
-    // "/api/v1/Posts/reject/{id}": {
-    //   put: {
-    //     tags: ["Posts"],
-    //     summary: "reject a Posts",
-    //     description: "rejecting Posts",
-    //     operationId: "rejectPosts",
-    //     parameters: [
-    //       {
-    //         name: "id",
-    //         in: "path",
-    //         description: "Posts's id",
-    //         required: true,
-    //         schema: {
-    //           type: "string",
-    //         },
-    //       },
-    //     ],
-      
-    //     responses: {
-    //       201: {
-    //         description: "Posts rejected successfully",
-    //       },
-    //       400: {
-    //         description: "Bad request",
-    //       },
-    //       401: {
-    //         description: "Unauthorized",
-    //       },
-    //       500: {
-    //         description: "Something went wrong",
-    //       },
-    //     },
-    //   },
-    // },
-    // "/api/v1/Posts/check/{id}": {
-    //   put: {
-    //     tags: ["Posts"],
-    //     summary: "Add a check",
-    //     description: "check Posts",
-    //     operationId: "checkPosts",
-    //     parameters: [
-    //       {
-    //         name: "id",
-    //         in: "path",
-    //         description: "Posts's id",
-    //         required: true,
-    //         schema: {
-    //           type: "string",
-    //         },
-    //       },
-    //     ],
-      
-    //     responses: {
-    //       201: {
-    //         description: "Posts checked successfully",
-    //       },
-    //       400: {
-    //         description: "Bad request",
-    //       },
-    //       401: {
-    //         description: "Unauthorized",
-    //       },
-    //       500: {
-    //         description: "Something went wrong",
-    //       },
-    //     },
-    //   },
-    // },
-    // "/api/v1/Posts/uncheck/{id}": {
-    //   put: {
-    //     tags: ["Posts"],
-    //     summary: "uncheck",
-    //     description: "uncheck Posts",
-    //     operationId: "uncheckPosts",
-    //     parameters: [
-    //       {
-    //         name: "id",
-    //         in: "path",
-    //         description: "Posts's id",
-    //         required: true,
-    //         schema: {
-    //           type: "string",
-    //         },
-    //       },
-    //     ],
-      
-    //     responses: {
-    //       201: {
-    //         description: "Posts checked successfully",
-    //       },
-    //       400: {
-    //         description: "Bad request",
-    //       },
-    //       401: {
-    //         description: "Unauthorized",
-    //       },
-    //       500: {
-    //         description: "Something went wrong",
-    //       },
-    //     },
-    //   },
-    // },
+        responses: {
+          201: {
+            description: "Posts rejected successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Something went wrong",
+          },
+        },
+      },
+    },
+
+    "/api/v1/Korari/update/{id}": {
+      "put": {
+        "tags": ["Korari"],
+        "summary": "update Korari",
+        "description": "update Korari",
+        "operationId": "updateKorari",
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            description: "korari's id",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "image file to upload"
+                  },
+                  "name": {
+                    "type": "string",
+                    // "format": "binary",
+                    "description": "Post title"
+                  },
+                  "admin": {
+                    "type": "string",
+                    // "format": "binary",
+                    "description": "description of post "
+                  },
+            
+                },
+                "required": ["file"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "File uploaded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "fileUrl": {
+                      "type": "string"
+                    },
+                    "public_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "File uploaded successfully",
+                    "fileUrl": "http://res.cloudinary.com/dzl8xve8s/pdf_uploads/sample.pdf",
+                    "public_id": "sample"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "No file uploaded"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Something went wrong"
+          }
+        }
+      }
+    },
+    "/api/v1/Korari/add": {
+      "post": {
+        "tags": ["Korari"],
+        "summary": "Add Korari",
+        "description": "Add Korari",
+        "operationId": "addKorari",
+        // parameters: [
+        //   {
+        //     name: "id",
+        //     in: "path",
+        //     description: "Posts's id",
+        //     required: true,
+        //     schema: {
+        //       type: "string",
+        //     },
+        //   },
+        // ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "image file to upload"
+                  },
+                  "name": {
+                    "type": "string",
+                    // "format": "binary",
+                    "description": "Post title"
+                  },
+                  "admin": {
+                    "type": "string",
+                    // "format": "binary",
+                    "description": "description of post "
+                  },
+            
+                },
+                "required": ["file"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "File uploaded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "fileUrl": {
+                      "type": "string"
+                    },
+                    "public_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "File uploaded successfully",
+                    "fileUrl": "http://res.cloudinary.com/dzl8xve8s/pdf_uploads/sample.pdf",
+                    "public_id": "sample"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "No file uploaded"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Something went wrong"
+          }
+        }
+      }
+    },
 
 
   },
