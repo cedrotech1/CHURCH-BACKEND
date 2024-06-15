@@ -35,6 +35,9 @@ module.exports = {
       notify:{
         type: Sequelize.STRING,
       },
+      file:{
+        type: Sequelize.STRING,
+      },
 
 
       createdAt: {

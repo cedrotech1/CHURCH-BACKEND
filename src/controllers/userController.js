@@ -13,6 +13,7 @@ import {
 } from "../services/userService";
 import Email from "../utils/mailer";
 import bcrypt from "bcrypt";
+import imageUploader from "../helper/imageUplouder";
 
 export const addCustomer = async (req, res) => {
   try {
@@ -117,13 +118,19 @@ export const getAllUsers = async (req, res) => {
     let users;
       users = await getallUsers();
 
-      if (req.user.role == "employee" || req.user.role == "customer") {
+      // if (req.user.role == "employee" || req.user.role == "customer") {
 
-        users = [];
-      }
+      //   users = users.filter(user => user.role === 'user');
+      // }
       if (req.user.role === "superadmin") {
   
-        users = users.filter(user => user.role === 'employee');
+        users = users.filter(user => user.role === 'user');
+        
+      }
+
+      if (req.user.role === "user") {
+  
+        users = users.filter(user => user.role !== 'superadmin' &&  user.id!=req.user.id);
         
       }
   
@@ -170,6 +177,31 @@ export const getOneUser = async (req, res) => {
 
 export const updateOneUser = async (req, res) => {
   try {
+
+    let image;
+
+    // Check if req.files and req.files.file exist to handle file upload
+    if (req.files && req.files.file) {
+      try {
+        // Upload the image and get the image URL
+        image = await imageUploader(req);
+    
+        // Check if image upload failed or if image URL is missing
+        if (!image || !image.url) {
+          throw new Error('Upload failed or image URL missing');
+        }
+    
+        // Assign the image URL to req.body.file
+        req.body.file = image.url;
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        // Handle error appropriately
+      }
+    }
+    
+    // If no file was uploaded or req.files.file doesn't exist, req.body.file remains undefined or unchanged
+    
+
     const user = await updateUser(req.params.id, req.body);
     return res.status(200).json({
       success: true,
@@ -189,6 +221,13 @@ export const updateOneUser = async (req, res) => {
 
 export const deleteOneUser = async (req, res) => {
   try {
+    if (req.user.role !== "superadmin") {
+      return res.status(401).json({
+        success: false,
+        message: "Not authorized, you are not superadmin",
+      });
+    }
+
     const existingUser = await getUser(req.params.id);
     if (!existingUser) {
       return res.status(404).json({

@@ -299,61 +299,163 @@ const options = {
       },
     },
 
+    // "/api/v1/users/update/{id}": {
+    //   put: {
+    //     tags: ["Users"],
+    //     summary: "Update a user",
+    //     description: "Update a user",
+    //     operationId: "updateOneUser",
+    //     parameters: [
+    //       {
+    //         name: "id",
+    //         in: "path",
+    //         description: "User's id",
+    //         required: true,
+    //         schema: {
+    //           type: "string",
+    //         },
+    //       },
+    //     ],
+    //     requestBody: {
+    //       content: {
+    //         "application/json": {
+    //           schema: {
+    //             $ref: "#/components/schemas/User",
+    //           },
+    //           example: {
+    //             firstname: "John",
+    //             lastname: "Doe",
+    //             email: "test@example.com",
+    //             phone: "08012345678",
+    //           },
+    //         },
+    //         "multipart/form-data": {
+    //           schema: {
+    //             $ref: "#/components/schemas/User",
+    //           },
+    //         },
+    //       },
+    //     },
+    //     responses: {
+    //       200: {
+    //         description: "User deleted successfully",
+    //       },
+    //       400: {
+    //         description: "Bad request",
+    //       },
+    //       401: {
+    //         description: "Unauthorized",
+    //       },
+    //       404: {
+    //         description: "User not found",
+    //       },
+    //       500: {
+    //         description: "Something went wrong",
+    //       },
+    //     },
+    //   },
+    // },
+
     "/api/v1/users/update/{id}": {
-      put: {
-        tags: ["Users"],
-        summary: "Update a user",
-        description: "Update a user",
-        operationId: "updateOneUser",
+      "put": {
+        "tags": ["Users"],
+        "summary": "update Users",
+        "description": "update Users",
+        "operationId": "updateUsers",
         parameters: [
           {
             name: "id",
             in: "path",
-            description: "User's id",
+            description: "users's id",
             required: true,
             schema: {
               type: "string",
             },
           },
         ],
-        requestBody: {
-          content: {
-            "application/json": {
-              schema: {
-                $ref: "#/components/schemas/User",
-              },
-              example: {
-                firstname: "John",
-                lastname: "Doe",
-                email: "test@example.com",
-                phone: "08012345678",
-              },
-            },
+        "requestBody": {
+          "required": true,
+          "content": {
             "multipart/form-data": {
-              schema: {
-                $ref: "#/components/schemas/User",
-              },
-            },
-          },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "image file to upload"
+                  },
+                  "firstname": {
+                    "type": "string",
+                    "description": "first name"
+                  },
+                  "lastname": {
+                    "type": "string",
+                    "description": "last name"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "description": "phone name"
+                  }
+                },
+                "required": ["file"]
+              }
+            }
+          }
         },
-        responses: {
-          200: {
-            description: "User deleted successfully",
+        "responses": {
+          "201": {
+            "description": "File uploaded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "fileUrl": {
+                      "type": "string"
+                    },
+                    "public_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "File uploaded successfully",
+                    "fileUrl": "http://res.cloudinary.com/dzl8xve8s/pdf_uploads/sample.pdf",
+                    "public_id": "sample"
+                  }
+                }
+              }
+            }
           },
-          400: {
-            description: "Bad request",
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "No file uploaded"
+                  }
+                }
+              }
+            }
           },
-          401: {
-            description: "Unauthorized",
+          "401": {
+            "description": "Unauthorized"
           },
-          404: {
-            description: "User not found",
-          },
-          500: {
-            description: "Something went wrong",
-          },
-        },
-      },
+          "500": {
+            "description": "Something went wrong"
+          }
+        }
+      }
     },
 // resetPassword
 "/api/v1/users/resetPassword/{email}": {

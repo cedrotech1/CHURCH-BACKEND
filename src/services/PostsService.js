@@ -57,7 +57,7 @@ export const getevents = async () => {
     });
 
     if (!events || events.length === 0) {
-      return null;
+      return [];
     }
 
 
@@ -121,7 +121,7 @@ export const getpics = async () => {
     });
 
     if (!pics || pics.length === 0) {
-      return null;
+      return [];
     }
 
 

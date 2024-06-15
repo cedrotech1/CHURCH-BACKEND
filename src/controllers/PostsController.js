@@ -68,14 +68,23 @@ export const addPostsController = async (req, res) => {
     }
 
     let image; 
-    if (req.files && req.files.file) { 
-      image = await imageUploader(req);
-     if (!image || !image.url) {
-     
-       throw new Error('Upload failed or image URL missing');
-     }
-   }
-     req.body.file = image.url;
+    if (req.files && req.files.file) {
+      try {
+        // Upload the image and get the image URL
+        image = await imageUploader(req);
+    
+        // Check if image upload failed or if image URL is missing
+        if (!image || !image.url) {
+          throw new Error('Upload failed or image URL missing');
+        }
+    
+        // Assign the image URL to req.body.file
+        req.body.file = image.url;
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        // Handle error appropriately
+      }
+    }
 
     if (req.body.type === 'event' || req.body.type === 'blog') {
       if (!req.body.title || !req.body.description) {
@@ -236,17 +245,7 @@ export const Events = async (req, res) => {
 
 
     let data = await getevents();
-    // data = allPosts;
-    // let data;
-
-    // if (req.user.role == "employee" || req.user.role == "superadmin") {
-
-    //   data = allPosts;
-    // }
-    // if (req.user.role === "customer") {
-
-    //   data = allPosts.filter(Posts => Posts.userid === req.user.id);
-    // }
+   
 
 
 

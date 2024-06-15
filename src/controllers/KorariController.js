@@ -13,14 +13,23 @@ import imageUploader from "../helper/imageUplouder";
 export const addKorariController = async (req, res) => {
   try {
     let image; 
-     if (req.files && req.files.file) { 
-       image = await imageUploader(req);
-      if (!image || !image.url) {
-      
-        throw new Error('Upload failed or image URL missing');
+    if (req.files && req.files.file) {
+      try {
+        // Upload the image and get the image URL
+        image = await imageUploader(req);
+    
+        // Check if image upload failed or if image URL is missing
+        if (!image || !image.url) {
+          throw new Error('Upload failed or image URL missing');
+        }
+    
+        // Assign the image URL to req.body.file
+        req.body.file = image.url;
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        // Handle error appropriately
       }
     }
-      req.body.file = image.url;
     let newKorari;
     newKorari = await createKorari(req.body);
   
@@ -71,12 +80,12 @@ export const updateKorariController = async (req, res) => {
 };
 export const deleteOneKorariController = async (req, res) => {
   try {
-    // if (req.user.role !== "customer") {
-    //   return res.status(401).json({
-    //     success: false,
-    //     message: "Not authorized, you are not  customer",
-    //   });
-    // }
+    if (req.user.role !== "superadmin") {
+      return res.status(401).json({
+        success: false,
+        message: "Not authorized, you are not superadmin",
+      });
+    }
 
 
     let data = await getoneKorari(req.params.id);

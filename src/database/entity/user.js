@@ -18,6 +18,7 @@ module.exports = (sequelize) => {
       password: DataTypes.STRING,
       resetkey: DataTypes.STRING,
       notify: DataTypes.STRING,
+      file: DataTypes.STRING,
      
     },
     {
