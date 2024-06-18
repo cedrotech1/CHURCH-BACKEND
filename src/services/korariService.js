@@ -6,6 +6,101 @@ const Posts = db["Posts"];
 
 
 
+export const getStatistics = async () => {
+  try {
+    // Count posts by type and korariId status
+    const numberofkorari = await Korari.count(); 
+    const numberofusers = await users.count(); 
+
+    const churchPostsCount = await Posts.count({
+      where: {
+        korariId: null
+      }
+    });
+
+    const korariPostsCount = await Posts.count({
+      where: {
+        korariId: {
+          [db.Sequelize.Op.not]: null
+        }
+      }
+    });
+
+    // Count posts by type for church (where korariId is null)
+    const churchPicCount = await Posts.count({
+      where: {
+        type: 'pic',
+        korariId: null
+      }
+    });
+
+    const churchEventCount = await Posts.count({
+      where: {
+        type: 'event',
+        korariId: null
+      }
+    });
+
+    const churchBlogCount = await Posts.count({
+      where: {
+        type: 'blog',
+        korariId: null
+      }
+    });
+
+    // Count posts by type for korari (where korariId is not null)
+    const korariPicCount = await Posts.count({
+      where: {
+        type: 'pic',
+        korariId: {
+          [db.Sequelize.Op.not]: null
+        }
+      }
+    });
+
+    const korariEventCount = await Posts.count({
+      where: {
+        type: 'event',
+        korariId: {
+          [db.Sequelize.Op.not]: null
+        }
+      }
+    });
+
+    const korariBlogCount = await Posts.count({
+      where: {
+        type: 'blog',
+        korariId: {
+          [db.Sequelize.Op.not]: null
+        }
+      }
+    });
+
+    const statistics = {
+      churchPosts: churchPostsCount,
+      korariPosts: korariPostsCount,
+      church: {
+        pic: churchPicCount,
+        event: churchEventCount,
+        blog: churchBlogCount
+      },
+      korari: {
+        pic: korariPicCount,
+        event: korariEventCount,
+        blog: korariBlogCount
+      },
+      users: numberofusers,
+      korari: numberofkorari
+    };
+
+    return statistics;
+  } catch (error) {
+    console.error('Error in getStatistics function:', error);
+    throw error; // Re-throw the error to handle it elsewhere
+  }
+};
+
+
 export const getoneKorari = async (id) => {
   try {
     // Fetch Korari details without posts
@@ -88,6 +183,14 @@ export const getOneKorariByadmin = async (id) => {
     console.error("Error fetching Korari:", error);
     throw error;
   }
+};
+
+export const checkExistingAdmin = async (id) => {
+  return await Korari.findOne({
+    where: {
+      admin: id,
+    },
+  });
 };
 
 

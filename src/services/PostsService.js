@@ -1,11 +1,8 @@
-
 import db from "../database/entity/index.js";
 
 const users = db["User"];
+const Korari = db["Koraris"];
 const Posts = db["Posts"];
-
-
-// createImagePosts
 
 
 
@@ -36,6 +33,7 @@ export const getAllPosts = async () => {
     throw error;
   }
 };
+
 
 export const getevents = async () => {
   try {

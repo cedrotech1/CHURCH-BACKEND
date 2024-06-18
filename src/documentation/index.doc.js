@@ -976,6 +976,30 @@ const options = {
 
 
 
+    "/api/v1/Korari/statistic": {
+      get: {
+        tags: ["Korari"],
+        summary: "all  a statistic",
+        description: "statistic",
+        operationId: "all statistic",
+      
+      
+        responses: {
+          201: {
+            description: "Korari retrieved successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Something went wrong",
+          },
+        },
+      },
+    },
     "/api/v1/Korari/": {
       get: {
         tags: ["Korari"],

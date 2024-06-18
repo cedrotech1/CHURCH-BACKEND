@@ -163,13 +163,23 @@ export const updatePostsController = async (req, res) => {
     }
 
     let image; 
-    if (req.files && req.files.file) { 
-      image = await imageUploader(req);
-     if (!image || !image.url) {
-     
-       throw new Error('Upload failed or image URL missing');
-     }
-   }
+    if (req.files && req.files.file) {
+      try {
+        // Upload the image and get the image URL
+        image = await imageUploader(req);
+    
+        // Check if image upload failed or if image URL is missing
+        if (!image || !image.url) {
+          throw new Error('Upload failed or image URL missing');
+        }
+    
+        // Assign the image URL to req.body.file
+        req.body.file = image.url;
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        // Handle error appropriately
+      }
+    }
      req.body.file = image.url;
 
     if (req.body.type === 'event' || req.body.type === 'blog') {
@@ -206,12 +216,7 @@ export const updatePostsController = async (req, res) => {
 
 export const deleteOnePostsController = async (req, res) => {
   try {
-    // if (req.user.role !== "customer") {
-    //   return res.status(401).json({
-    //     success: false,
-    //     message: "Not authorized, you are not  customer",
-    //   });
-    // }
+ 
 
 
     let data = await getone(req.params.id);
@@ -221,8 +226,14 @@ export const deleteOnePostsController = async (req, res) => {
         message: "not found",
       });
     }
-
-    const Posts = await deleteOnePosts(req.params.id);
+    // console.log(req.user.role);
+    if (req.user.role === "user" || data[0].korariIdd === 'null') {
+      return res.status(401).json({
+        success: false,
+        message: "Not authorized, you are not allowed to delete church posts",
+      });
+    }
+  
 
     return res.status(200).json({
       success: true,
@@ -246,9 +257,6 @@ export const Events = async (req, res) => {
 
     let data = await getevents();
    
-
-
-
 
     return res.status(200).json({
       success: true,
