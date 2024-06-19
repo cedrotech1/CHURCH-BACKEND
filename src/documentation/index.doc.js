@@ -22,6 +22,7 @@ const options = {
     { name: "Users", description: "Users" },
     { name: "Posts", description: "Posts" },
     { name: "Korari", description: "Korari" },
+    { name: "payment", description: "payment" },
 
 
   ],
@@ -1030,7 +1031,7 @@ const options = {
         summary: "one  a Korari",
         description: "Korari",
         operationId: "one Korari",
-             parameters: [
+         parameters: [
           {
             name: "id",
             in: "path",
@@ -1296,6 +1297,198 @@ const options = {
       }
     },
 
+
+    "/api/v1/payment/cashin": {
+      post: {
+        tags: ["payment"],
+        summary: "make cashin payment",
+        description: "make cashin payment",
+        operationId: "make cashin payment",
+        requestBody: {
+          content: {
+            "application/json": {
+             
+              example: {
+                number: "0785366616",
+                amount: "100",
+                environment: "development",
+              },
+            },
+            required: true,
+          },
+        },
+        responses: {
+          201: {
+            description: "Cash-in request successful",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Something went wrong",
+          },
+        },
+      },
+    },
+
+    "/api/v1/payment/cashout": {
+      post: {
+        tags: ["payment"],
+        summary: "make cashout payment",
+        description: "make  cashout payment",
+        operationId: "make cashout payment",
+        requestBody: {
+          content: {
+            "application/json": {
+             
+              example: {
+                number: "0785366616",
+                amount: "100",
+                environment: "development",
+              },
+            },
+            required: true,
+          },
+        },
+        responses: {
+          201: {
+            description: "Cash-in request successful",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Something went wrong",
+          },
+        },
+      },
+    },
+    "/api/v1/payment/transactions": {
+      get: {
+        tags: ["payment"],
+        summary: "Retrieve transactions",
+        description: "Retrieves a list of transactions with optional offset and limit parameters",
+        operationId: "getTransactions",
+        parameters: [
+          {
+            name: "offset",
+            in: "query",
+            description: "korari's id",
+            required: false,
+            schema: {
+              type: "integer",
+              minimum: 0,
+              description: "Offset for pagination (default: 0)",
+            },
+            },
+            {
+              name: "limit",
+              in: "query",
+              description: "korari's id",
+              required: false,
+              schema: {
+                type: "integer",
+                minimum: 1,
+                maximum: 100,
+                description: "Offset for pagination (default: 0)"
+              },
+          },
+        ],
+        responses: {
+          201: {
+            description: "List of transactions retrieved successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Something went wrong",
+          },
+        },
+      },
+    },
+
+    "/api/v1/payment/events": {
+      get: {
+        tags: ["payment"],
+        summary: "Retrieve events",
+        description: "Retrieves a list of events with optional offset and limit parameters",
+        operationId: "getevents",
+        parameters: [
+          {
+            name: "offset",
+            in: "query",
+            description: "korari's id",
+            required: false,
+            schema: {
+              type: "integer",
+              minimum: 0,
+              description: "Offset for pagination (default: 0)",
+            },
+            },
+            {
+              name: "limit",
+              in: "query",
+              description: "korari's id",
+              required: false,
+              schema: {
+                type: "integer",
+                minimum: 1,
+                maximum: 100,
+                description: "Offset for pagination (default: 0)"
+              },
+          },
+        ],
+        responses: {
+          201: {
+            description: "List of events retrieved successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Something went wrong",
+          },
+        },
+      },
+    },
+    "/api/v1/payment/account": {
+      get: {
+        tags: ["payment"],
+        summary: "Retrieve account",
+        description: "Retrieves a  account with optional",
+        operationId: "getaccount",
+ 
+        responses: {
+          201: {
+            description: "account retrieved successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Something went wrong",
+          },
+        },
+      },
+    },
+
+    
 
   },
 
