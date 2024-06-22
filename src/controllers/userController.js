@@ -180,13 +180,10 @@ export const updateOneUser = async (req, res) => {
 
     let image;
 
-    // Check if req.files and req.files.file exist to handle file upload
     if (req.files && req.files.file) {
       try {
-        // Upload the image and get the image URL
         image = await imageUploader(req);
-    
-        // Check if image upload failed or if image URL is missing
+  
         if (!image || !image.url) {
           throw new Error('Upload failed or image URL missing');
         }
@@ -195,11 +192,8 @@ export const updateOneUser = async (req, res) => {
         req.body.file = image.url;
       } catch (error) {
         console.error('Error uploading image:', error);
-        // Handle error appropriately
       }
     }
-    
-    // If no file was uploaded or req.files.file doesn't exist, req.body.file remains undefined or unchanged
     
 
     const user = await updateUser(req.params.id, req.body);

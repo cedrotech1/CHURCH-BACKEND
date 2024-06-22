@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      korariId: { // Add this field
+      korariId: { 
         type: DataTypes.INTEGER,
         allowNull: true,
       },

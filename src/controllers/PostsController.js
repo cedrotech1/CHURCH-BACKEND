@@ -233,6 +233,16 @@ export const deleteOnePostsController = async (req, res) => {
         message: "Not authorized, you are not allowed to delete church posts",
       });
     }
+    console.log(data[0].PostsUser.id);
+
+    if (req.user.role === "user" || data[0].PostsUser.id!==req.user.id) {
+      return res.status(401).json({
+        success: false,
+        message: "you can not delete post posted by others",
+      });
+    }
+
+    const Posts = await deleteOnePosts(req.params.id);
   
 
     return res.status(200).json({
