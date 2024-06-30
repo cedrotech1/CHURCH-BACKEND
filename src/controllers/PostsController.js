@@ -235,7 +235,7 @@ export const deleteOnePostsController = async (req, res) => {
     }
     console.log(data[0].PostsUser.id);
 
-    if (req.user.role === "user" || data[0].PostsUser.id!==req.user.id) {
+    if (req.user.role === "user" && data[0].PostsUser.id!==req.user.id) {
       return res.status(401).json({
         success: false,
         message: "you can not delete post posted by others",
