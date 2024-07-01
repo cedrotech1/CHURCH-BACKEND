@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Claim Ckecked Notification</title>
+    <title>New Post Added</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -9,6 +9,7 @@
         background-color: #f0f4f9;
         padding: 20px;
         margin: 0;
+        text-align: center;
       }
       .email-container {
         max-width: 600px;
@@ -17,11 +18,11 @@
         padding: 20px;
         border-radius: 4px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        border-top: 4px solid #4caf50;
+        border-top: 4px solid #ffa500;
       }
       a,
       a:visited {
-        color: #4caf50;
+        color: #ffa500;
         text-decoration: none;
       }
       a:hover,
@@ -30,15 +31,13 @@
       }
       .header {
         color: #fff;
-        background-color: #4caf50;
+        background-color: #ffa500;
         padding: 10px;
         border-radius: 4px 4px 0 0;
         font-size: 24px;
         line-height: 28px;
-        text-align: center;
       }
       .button {
-        background-color: #4caf50; /* Green */
         border: none;
         color: white !important;
         padding: 10px 20px;
@@ -50,55 +49,64 @@
         cursor: pointer;
         border-radius: 4px;
       }
+      .confirm-button {
+        background-color: #4caf50;
+      }
+      .reject-button {
+        background-color: #f44336;
+      }
       .footer {
         font-size: 12px;
         color: #909090;
         margin-top: 20px;
-        text-align: center;
       }
     </style>
   </head>
   <body style="background-color: #f0f4f9">
     <br><br>
     <div class="email-container">
-      <div class="header">Claim Checked Confirmation</div>
-      <h4>Congratulations <%= firstname %> <%= lastname %>,</h4>
+      <div class="header">New Post</div>
+      <h4>Dear <%= firstname %>,</h4>
       <p>
-        Your claim request has been checked now go to system and download your claim file after You will appload signed file by RIB. Below are the details:
+        A new post has been submitted. Please review the details below:
       </p>
       <table style="margin: auto; width: 90%; text-align: left">
+        <% if (title) { %>
         <tr>
-          <td><strong>claim title</strong></td>
+          <td><strong>Post Title:</strong></td>
           <td><%= title %></td>
         </tr>
+        <% } %>
+        <% if (description) { %>
         <tr>
-          <td  colspan="2" style="text-align: center;"><strong>description:</strong></td>
-       
+          <td colspan="2" style="text-align: center;"><strong>Description:</strong></td>
         </tr>
         <tr>
-          <td  colspan="2"><strong><%= description %></strong></td>
-       
+          <td colspan="2"><%= description %></td>
         </tr>
-        <!-- description -->
-       
+        <% } %>
         <tr>
-          <td><strong>Date</strong></td>
+          <td colspan="2"><img style="width: 100%;" src="<%= file %>" alt=""></td>
+        </tr>
+        <tr>
+          <td><strong>Date:</strong></td>
           <td><%= date %></td>
         </tr>
         <tr>
-          <td><strong>Time</strong></td>
+          <td><strong>Time:</strong></td>
           <td><%= time %></td>
         </tr>
       </table>
-      <p>
-        Please ensure that you came to our head quarter for more details about your claim
-      </p>
-      <p>
-        If you have any questions or need further assistance, please don't
-        hesitate to reply to this email or contact us at
-        <a href="mailto:email@example.com">email@example.com</a>.
-      </p>
-     
+      <br/>
+      <a target="_blank" href="<%= url %>">Click here to view on web</a>
+      <br/> <br/>
+      <p>Warm regards,<br />Millacle Church</p>
+      <div class="footer">
+        This is an automated message, please do not reply directly. <br />
+        For further assistance, reply to this email or reach out through the appropriate channels. <br>
+        <a target="_blank" href="https://miracle-center-remera.vercel.app/">website</a>.
+      </div>
+ 
     </div>
   </body>
 </html>

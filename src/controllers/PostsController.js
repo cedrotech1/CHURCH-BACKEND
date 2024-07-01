@@ -11,14 +11,15 @@ import {
   createImagePosts,
   getevents,
   getblogs,
-  getpics
+  getpics,
+  
   
   
 } from "../services/PostsService";
 import {
   getOneKorariByadmin,
 } from "../services/korariService";
-import {getUserEmployees} from "../services/userService";
+import {getUserChristian} from "../services/userService";
 import Email from "../utils/mailer";
 import { upload } from '../utils/cloudinaryConfig';
 import imageUploader from "../helper/imageUplouder";
@@ -28,6 +29,7 @@ import imageUploader from "../helper/imageUplouder";
 export const addPostsController = async (req, res) => {
   try {
     let korari;
+
     console.log(req.user.id)
     if (req.user.role === "user") {
       korari = await getOneKorariByadmin(req.user.id);
@@ -41,6 +43,9 @@ export const addPostsController = async (req, res) => {
 
       req.body.korariId = parseInt(korari[0].id);
     }
+
+    let approval = await getUserChristian();
+    console.log(approval);
 
     req.body.userid = req.user.id;
 
@@ -103,6 +108,19 @@ export const addPostsController = async (req, res) => {
     } else {
       newPosts = await createPosts(req.body);
     }
+    let url=`https://miracle-center-remera.vercel.app/one/${newPosts.id}`
+
+    const email = new Email(req.user, newPosts,url);
+    await email.sendPostConfirmation();
+   
+
+    if (approval && approval.length > 0) {
+      approval.forEach(async (user) => {
+        await new Email(user, newPosts,url).sendPostNewRequest();
+      });
+    }
+
+
 
     return res.status(201).json({
       success: true,
@@ -216,8 +234,6 @@ export const updatePostsController = async (req, res) => {
 
 export const deleteOnePostsController = async (req, res) => {
   try {
- 
-
 
     let data = await getone(req.params.id);
     if (!data) {

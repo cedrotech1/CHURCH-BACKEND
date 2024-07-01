@@ -36,10 +36,10 @@ export const getUserByCode = async (email,code) => {
   }
 };
 
-export const getUserEmployees = async () => {
+export const getUserChristian = async () => {
   try {
     const allUsers = await users.findAll({
-      where: {  role: "employee" },
+      where: {  role: "christian",notify:"yes" },
       attributes: {
         exclude: ["password"],
       },

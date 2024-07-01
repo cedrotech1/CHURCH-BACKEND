@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Claim Request Confirmation</title>
+    <title>Post Confirmation</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -48,45 +48,48 @@
   <body style="background-color: #f0f4f9">
     <br><br>
     <div class="email-container">
-      <div class="header">Claim Request Received successfully</div>
+      <div class="header">Post saved successfully</div>
       <h4>Dear <%= firstname %> <%= lastname %>,</h4>
       <p>
-        We have successfully received your request for claim. Here
-        are the details you provided:
+        You have successfully saved the post. Here are the details you provided:
       </p><br>
-      <strong>Your Claim Title </strong><br>
-      <p><%= title %></p>
-      
-
-
       <table style="margin: auto; width: 90%; text-align: left">
-        
-        
+        <% if (title) { %>
         <tr>
-          <td><strong>Date</strong></td>
+          <td><strong>Post Title</strong></td>
+          <td><%= title %></td>
+        </tr>
+        <% } %>
+        <% if (description) { %>
+        <tr>
+          <td colspan="2" style="text-align: center;"><strong>Description</strong></td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= description %></td>
+        </tr>
+        <% } %>
+        <tr>
+          <td colspan="2"><img style="width: 100%;" src="<%= file %>" alt=""></td>
+        </tr>
+        <tr>
+          <td><strong>Date:</strong></td>
           <td><%= date %></td>
         </tr>
         <tr>
-          <td><strong>Time</strong></td>
+          <td><strong>Time:</strong></td>
           <td><%= time %></td>
         </tr>
       </table>
-      <p>
-        Your request is currently being processed, and we will notify you as
-        soon as your request is checked.
-      </p>
-      <p>
-        Should you have any additional requests or questions, please do not
-        hesitate to reach out by replying to this email or contacting us at
-        <a href="rra@gmail.com">rra@gmail.com</a>.
-      </p>
-
-      <p>Warm regards,<br />RRA-Claim</p>
+      <br/>
+      <a target="_blank" href="<%= url %>">Click here to view on web</a>
+      <br/><br/>
+      <p>Warm regards,<br/>Millacle Church</p>
       <div class="footer">
-        This is an automated message, please do not reply directly. <br />
-        For further assistance, reply to this email or reach out through the
-        appropriate channels.
+        This is an automated message, please do not reply directly. <br/>
+        For further assistance, reply to this email or reach out through the appropriate channels.<br>
+        <a target="_blank" href="https://miracle-center-remera.vercel.app/">website</a>.
       </div>
+
     </div>
   </body>
 </html>

@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 class Email {
-  constructor(user, claim = null, url = null, booking = null, reason = null) {
+  constructor(user, claim = null, url = null, post = null, reason = null) {
     this.to = user.email;
     this.firstname = user.firstname;
     this.lastname = user.lastname;
@@ -13,7 +13,7 @@ class Email {
     this.password = user.password;
     this.from = process.env.EMAIL_FROM;
     this.url = url;
-    this.booking = booking;
+    this.post = post;
     this.reason = reason;
     this.claim = claim;
   }
@@ -31,10 +31,11 @@ class Email {
         email: this.email,
         password: this.password,
         url: this.url,
-        booking: this.booking,
+        post: this.post,
         reason: this.reason,
         claim: this.claim,
         title: this.claim ? this.claim.title : null,
+        file: this.claim ? this.claim.file : null,
         description: this.claim ? this.claim.description : null,
         date: this.claim ? this.claim.date : null,
         time: this.claim ? this.claim.time : null,
@@ -69,31 +70,13 @@ class Email {
     await this.send("accountAdded", "Your Account on millacle web is Ready");
   }
 
-  async sendClaimConfirmation() {
-    await this.send("claimConfirmation", "Claim Confirmation");
+  async sendPostConfirmation() {
+    await this.send("postConfirmation", "Post Confirmation");
   }
 
 
-
-
-  async sendClaimApproval() {
-    await this.send("ClaimApproval", "RRA-claim  Approval");
-  }
-
-  async sendClaimRejection() {
-    await this.send("ClaimRejection", "RRA-claim Rejection");
-  }
-
-  async sendClaimCheckedApproval() {
-    await this.send("ClaimCheckedApproval", "RRA-claim  checked your claim");
-  }
-
-  async sendClaimUnCheckedRejection() {
-    await this.send("ClaimUnChachedRejection", "RRA-claim un chacked");
-  }
-
-  async sendClaimNewRequest() {
-    await this.send("ClaimRequest", "RRA-claim New request");
+  async sendPostNewRequest() {
+    await this.send("PostRequest", "Millacle-New post");
   }
 
 
